@@ -4,11 +4,10 @@ let current_table = null;
 
 
 let basepath = window.location
-console.log(basepath['host'])
 
 // Function to fetch columns for the selected table
 function fetchColumns(tableName, callback) {
-    fetch(`${basepath['host']}/get_columns/${tableName}`)
+    fetch(`${basepath['origin']}/get_columns/${tableName}`)
         .then(response => response.json())
         .then(columns => {
             callback(columns);
@@ -751,7 +750,7 @@ function submission(){
 
     console.log(rules);
 
-    fetch(`${basepath['host']}/save_rules`, {
+    fetch(`${basepath['origin']}/save_rules`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rules }),
@@ -760,7 +759,7 @@ function submission(){
         .then(data => alert(data.message))
         .catch(error => console.error('Error:', error));
         
-    fetch(`${basepath['host']}/remove_rules`, {
+    fetch(`${basepath['origin']}/remove_rules`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ removedRulesId }),
